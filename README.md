@@ -1,5 +1,8 @@
-## didactic-diy
+## didactic-diy: Tiktok
 #### Description: DataSci randomness, for practice and utility.
+
+<b>License: [GNU General Public License v3.0](https://choosealicense.com/licenses/gpl-3.0/)</b>
+
 ---
 #### Contents include the following: 
 - Webscraping
@@ -7,13 +10,12 @@
 - Data Processing
 - Modeling (e.g., Statistical, ML)
 - Visualization
-- more...
+
 ---
 #### Programming Lx's include the following: 
 - HTML5
 - CSS3
-- JS (e.g., Node.JS, TypeScript, React.JS)
+- JS
 - Python3
-- SQL (e.g., PostgreSQL, MySQL, SQLite)
-- R
+- SQL
 ---
