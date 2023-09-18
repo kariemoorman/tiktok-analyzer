@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python
 
 import os
 import time
@@ -17,16 +17,16 @@ from pyppeteer import launch
 class TikTokScraper:
     ''' 
     Function:
-    For each username in username list, extract username, bio, video URLs.
+    For each tag in tag list, extract video title and video URL.
     Write results as CSV, JSON, or PARQUET.
     
     Input Values:
-    Usernames: Input type list of (str) tiktok usernames (without @). 
+    Tag: Input type list of (str) tiktok tags (without #). 
     Browser: Input type (str), either "selenium" or "pyppeteer." Default = 'pyppeteer'.
     File Format: Input type (str), either "csv", "json" or "parquet." Default = 'csv'.
     
     Example: 
-    python3 tiktok_user_video_scraper.py blitzphd eczachly --b pyppeteer --o csv
+    python3 tiktok_tag_video_scraper.py amazonscam --b pyppeteer --o csv
     '''
     
     def __init__(self, browser, output_file_format):
@@ -68,44 +68,61 @@ class TikTokScraper:
             # Update the scroll height for the next iteration
             last_height = new_height
 
-    async def _extract_data_selenium(self, username, driver):
-        url = f"https://www.tiktok.com/@{username}"
+    async def _extract_data_selenium(self, tag, driver):
+        url = f"https://www.tiktok.com/tag/{tag}"
         driver.get(url)
         await self._scroll_to_end_selenium(driver)
-        # Extract username bio and videos
-        bio = driver.find_element(By.XPATH, "//h2[@data-e2e='user-bio']").text
-        videos = driver.find_elements(By.XPATH, f"//a[contains(@href,'{url}')]")
-        video_links = [i.get_attribute('href') for i in videos]
-        
-        os.makedirs(f"../__data/__tiktoks/{username}", exist_ok=True)
-        self.tiktok_df['username'] = [username for _ in range(len(video_links))]
-        self.tiktok_df['user_bio'] = [bio for _ in range(len(video_links))]
-        self.tiktok_df['video_link'] = video_links
-        self._save_to_file(username)
+        # Extract video titles and urls
+        div_elements = driver.find_elements(By.CSS_SELECTOR, 'div.DivItemContainerV2')
+        titles = []
+        hrefs = []
+        tags = []
+        for div_element in div_elements:
+            a_element = div_element.find_element(By.TAG_NAME, 'a')
+            title = a_element.get_attribute('title')
+            href = a_element.get_attribute('href')
+            titles.append(title)
+            hrefs.append(href)
+            tags.append(tag)
+            
+        os.makedirs(f"../__data/__tiktoks/{tag}", exist_ok=True)
+        self.tiktok_df['tag'] = tags
+        self.tiktok_df['url'] = hrefs
+        self.tiktok_df['title'] = titles
+        self._save_to_file(tag)
 
-    async def _extract_data_pyppeteer(self, page, username):
-        url = f"https://www.tiktok.com/@{username}"
+    async def _extract_data_pyppeteer(self, page, tag):
+        url = f"https://www.tiktok.com/tag/{tag}"
         await page.goto(url)
         await self._scroll_to_end_pyppeteer(page)
-        # Extract username bio and videos
-        bio = await page.evaluate('() => document.querySelector("h2[data-e2e=\'user-bio\']").textContent')
-        video_links = await page.querySelectorAllEval(f'a[href*="{username}"]', 'nodes => nodes.map(node => node.href)')
-        
-        os.makedirs(f"../__data/__tiktoks/{username}", exist_ok=True)
-        self.tiktok_df['username'] = [username for _ in range(len(video_links))]
-        self.tiktok_df['user_bio'] = [bio for _ in range(len(video_links))]
-        self.tiktok_df['video_link'] = video_links
-        self._save_to_file(username)
+        # Extract video titles and urls
+        div_elements = await page.querySelectorAll('div.DivItemContainerV2')
+        titles = []
+        hrefs = []
+        tags = []
+        for div_element in div_elements:
+            a_element = await div_element.querySelector('a')
+            title = await a_element.evaluate('(element) => element.getAttribute("title")')
+            href = await a_element.evaluate('(element) => element.getAttribute("href")')
+            titles.append(title)
+            hrefs.append(href)
+            tags.append(tag)
 
-    def _save_to_file(self, username):
+        os.makedirs(f"../__data/__tiktoks/{tag}", exist_ok=True)
+        self.tiktok_df['tag'] = tags
+        self.tiktok_df['url'] = hrefs
+        self.tiktok_df['title'] = titles
+        self._save_to_file(tag)
+
+    def _save_to_file(self, tag):
         if self.output_file_format == 'json':
-            self.tiktok_df.to_json(f"../__data/__tiktoks/{username}/tiktok_data_{username}_{self.snapshotdatetime}.json", orient='records')
+            self.tiktok_df.to_json(f"../__data/__tiktoks/{tag}/{tag}__tiktok_videos_{self.snapshotdatetime}.json", orient='records')
         elif self.output_file_format == 'parquet':
-            self.tiktok_df.to_parquet(f"../__data/__tiktoks/{username}/tiktok_data_{username}_{self.snapshotdatetime}.parquet", index=False, compression='gzip')
+            self.tiktok_df.to_parquet(f"../__data/__tiktoks/{tag}/{tag}__tiktok_videos_{self.snapshotdatetime}.parquet", index=False, compression='gzip')
         elif self.output_file_format == 'csv':
-            self.tiktok_df.to_csv(f"../__data/__tiktoks/{username}/tiktok_data_{username}_{self.snapshotdatetime}.csv", index=False, sep='\t', encoding='utf-8')
+            self.tiktok_df.to_csv(f"../__data/__tiktoks/{tag}/{tag}__tiktok_videos_{self.snapshotdatetime}.csv", index=False, sep='\t', encoding='utf-8')
     
-    async def scrape_user_video(self, username_list):
+    async def scrape_tag_video(self, tag_list):
         if self.browser == 'selenium':
             CHROMEDRIVER_PATH = ""
             CHROME_PATH = ""
@@ -118,31 +135,30 @@ class TikTokScraper:
             options.add_experimental_option("prefs", prefs)
 
             driver = webdriver.Chrome(options=options)
-            for username in username_list:
-                await self._extract_data_selenium(username, driver)
+            for tag in tag_list:
+                await self._extract_data_selenium(tag, driver)
             driver.quit()
 
         elif self.browser == 'pyppeteer':
             browser = await launch(headless=True)
             page = await browser.newPage()
-            for username in username_list:
-                await self._extract_data_pyppeteer(page, username)
+            for tag in tag_list:
+                await self._extract_data_pyppeteer(page, tag)
             await browser.close()
         
         print("Task Complete!")
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Scrape TikTok user videos.")
-    parser.add_argument("usernames", type=str, nargs="+", help="List of TikTok usernames to scrape.")
+    parser = argparse.ArgumentParser(description="Scrape TikTok videos by tag.")
+    parser.add_argument("tags", type=str, nargs="+", help="List of TikTok tags to scrape.")
     parser.add_argument("--browser","-b", type=str, choices=["selenium", "pyppeteer"], default="pyppeteer", help="Choose browser for scraping.")
     parser.add_argument("--output_file_format", "-o", type=str, choices=["csv", "json", "parquet"], default="csv", help="Choose output file format.")
     args = parser.parse_args()
 
     scraper = TikTokScraper(args.browser, args.output_file_format)
-    asyncio.get_event_loop().run_until_complete(scraper.scrape_user_video(args.usernames))
+    asyncio.get_event_loop().run_until_complete(scraper.scrape_tag_video(args.tags))
 
 
 if __name__ == "__main__":
     main()
-
