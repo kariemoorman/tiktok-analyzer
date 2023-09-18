@@ -22,7 +22,7 @@
     Choose either Google or OpenAI ASR model to transcribe Tiktok video (in mp4 format).  
       E.g., ```python3 tiktok_video_to_text.py <path/to/video_filename.mp4> -m openai```
 
-- <b>Sample Datasets</b>: [__data](https://github.com/kariemoorman/didactic-diy/tree/main/tiktok/__data)
+
 
 ---
 
