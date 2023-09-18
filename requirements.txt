@@ -1,5 +1,6 @@
 keyboard==0.13.5
 openai-whisper==20230314
+pandas==2.1.0
 pydub==0.25.1
 pyppeteer==1.0.2
 regex==2023.6.3
