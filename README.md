@@ -1,5 +1,5 @@
 ## TikTok-Teller
-#### Description: TikTok Video Scraping and Content Analysis Tool.
+#### Description: TikTok Video Scraping and Content Analysis Tool
 
 ---
 ### Repository Contents
