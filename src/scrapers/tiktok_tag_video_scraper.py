@@ -29,10 +29,12 @@ class TikTokScraper:
     python3 tiktok_tag_video_scraper.py amazonscam --b pyppeteer --o csv
     '''
     
-    def __init__(self, browser, output_file_format):
+    def __init__(self, browser, driver, output_file_format):
+        self.user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
         self.snapshotdate = datetime.today().strftime('%d-%b-%Y')
         self.snapshotdatetime = datetime.today().strftime('%d-%b-%Y_%H-%M-%S')
         self.tiktok_df = pd.DataFrame()
+        self.driver = driver 
         self.browser = browser
         self.output_file_format = output_file_format
         print(f'Initiating task using {browser}...')
@@ -116,25 +118,37 @@ class TikTokScraper:
 
     def _save_to_file(self, tag):
         if self.output_file_format == 'json':
-            self.tiktok_df.to_json(f"../__data/__tiktoks/{tag}/{tag}__tiktok_videos_{self.snapshotdatetime}.json", orient='records')
+            self.tiktok_df.to_json(f"../../__data/__tiktoks/{tag}/{tag}__tiktok_videos_{self.snapshotdatetime}.json", orient='records')
         elif self.output_file_format == 'parquet':
-            self.tiktok_df.to_parquet(f"../__data/__tiktoks/{tag}/{tag}__tiktok_videos_{self.snapshotdatetime}.parquet", index=False, compression='gzip')
+            self.tiktok_df.to_parquet(f"../../__data/__tiktoks/{tag}/{tag}__tiktok_videos_{self.snapshotdatetime}.parquet", index=False, compression='gzip')
         elif self.output_file_format == 'csv':
-            self.tiktok_df.to_csv(f"../__data/__tiktoks/{tag}/{tag}__tiktok_videos_{self.snapshotdatetime}.csv", index=False, sep='\t', encoding='utf-8')
+            self.tiktok_df.to_csv(f"../../__data/__tiktoks/{tag}/{tag}__tiktok_videos_{self.snapshotdatetime}.csv", index=False, sep='\t', encoding='utf-8')
     
     async def scrape_tag_video(self, tag_list):
         if self.browser == 'selenium':
-            CHROMEDRIVER_PATH = ""
-            CHROME_PATH = ""
-            WINDOW_SIZE = "1920,1080"
-            options = ChromeOptions()
-            options.add_argument("--headless")
-            options.add_argument("--window-size=%s" % WINDOW_SIZE)
-            options.binary_location = CHROME_PATH
-            prefs = {'profile.managed_default_content_settings.images': 2}
-            options.add_experimental_option("prefs", prefs)
+            if self.driver == 'chrome':
+                CHROMEDRIVER_PATH = ""
+                CHROME_PATH = ""
+                WINDOW_SIZE = "1920,1080"
+                options = ChromeOptions()
+                options.add_argument("--headless")
+                options.add_argument("--window-size=%s" % WINDOW_SIZE)
+                options.binary_location = CHROME_PATH
+                prefs = {'profile.managed_default_content_settings.images': 2}
+                options.add_experimental_option("prefs", prefs)
 
-            driver = webdriver.Chrome(options=options)
+                driver = webdriver.Chrome(options=options)
+            else: 
+                FIREFOXDRIVER_PATH = ""
+                FIREFOX_PATH = ""
+                WINDOW_SIZE = "1920,1080"
+                options = FirefoxOptions()
+                options.add_argument(f"user-agent={self.user_agent}")
+                #options.add_argument("--headless")  
+                options.add_argument("--window-size=%s" % WINDOW_SIZE)
+
+                driver = webdriver.Firefox(options=options)
+            
             for tag in tag_list:
                 await self._extract_data_selenium(tag, driver)
             driver.quit()
@@ -153,10 +167,11 @@ def main():
     parser = argparse.ArgumentParser(description="Scrape TikTok videos by tag.")
     parser.add_argument("tags", type=str, nargs="+", help="List of TikTok tags to scrape.")
     parser.add_argument("--browser","-b", type=str, choices=["selenium", "pyppeteer"], default="pyppeteer", help="Choose browser for scraping.")
+    parser.add_argument("--driver", "-d", type=str, choices=["chrome", "firefox"], default="firefox", help="Choose the Selenium driver type.")
     parser.add_argument("--output_file_format", "-o", type=str, choices=["csv", "json", "parquet"], default="csv", help="Choose output file format.")
     args = parser.parse_args()
 
-    scraper = TikTokScraper(args.browser, args.output_file_format)
+    scraper = TikTokScraper(args.browser, args.driver, args.output_file_format)
     asyncio.get_event_loop().run_until_complete(scraper.scrape_tag_video(args.tags))
 
 
