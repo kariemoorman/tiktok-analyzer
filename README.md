@@ -1,4 +1,4 @@
-## Tiktok-Teller
+## TikTok-Teller
 #### Description: Titkok Video Scraping and Analysis Tool.
 
 ---
