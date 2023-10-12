@@ -1,5 +1,4 @@
 keyboard
-nltk
 numpy
 openai-whisper
 pandas
@@ -10,6 +9,3 @@ selenium
 spacy
 SpeechRecognition
 tqdm
-
-nltk.download('punkt')
-nltk.download('averaged_perceptron_tagger')
