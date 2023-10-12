@@ -3,14 +3,14 @@
 import re
 import json
 import numpy as np
-import nltk
-from nltk.tokenize import word_tokenize
+import spacy
 
+nlp = spacy.load("en_core_web_md")
 
 emotion_adjs = [
     "Happy", "Sad", "Angry", "Excited", "Fearful", "Confident", "Relaxed", "Anxious", 
     "Joyful", "Depressed", "Grateful", "Content", "Enthusiastic", "Worried", "Surprised", 
-    "Nervous", "Frustrated", "Proud", "Curious", "Hopeful", "Lonely", "Optimistic", 
+    "Nervous", "Frustrated", "Proud", "Curious", "Hopeful", "Lonely", "Optimistic", "Rude",
     "Overwhelmed", "Irritated", "Amazed", "Disappointed", "Guilty", "Jealous", "Confused", 
     "Loved", "Hated", "Indifferent", "Ecstatic", "Embarrassed", "Insecure", "Sympathetic", 
     "Apathetic", "Pleased", "Skeptical", "Overjoyed", "Elated", "Discontent", "Resentful",
@@ -26,7 +26,7 @@ emotion_adjs = [
     "Thoughtful", "Captivated", "Impulsive", "Devoted", "Zestful", "Inspired", "Rapturous", 
     "Reflective", "Desolate", "Desperate", "Flabbergasted", "Forlorn", "Heedless", "Hollow", 
     "Introspective", "Lively", "Malcontent", "Mournful", "Ominous", "Passionate", "Receptive", 
-    "Scornful", "Sentimental", "Spellbound", "Unnerved", "Vexed", "Zealous", "Rad", "Awesome"
+    "Scornful", "Sentimental", "Spellbound", "Unnerved", "Vexed", "Zealous", "Rad", "Awesome", "Obnoxious"
     ]
 
 emotion_nouns = [
@@ -75,9 +75,10 @@ def filter_words(text):
     string = re.sub(r"((?<=[a-z])\'d\b)", " would", string)
     string = re.sub(r"((?<=[a-z])\'s\b)", "", string)
     string = re.sub(r"[^\w\s]", "", string)
-    # Tokenize words
-    tokens = word_tokenize(string.lower())
+    # Lemmatize words
+    doc = nlp(string.lower())
+    lemmas = [token.lemma_ for token in doc if token.is_alpha and not token.is_punct]
     # Extract emotion words
     emotion_words = emotion_adjs + emotion_verbs + emotion_nouns
-    emotion_list = [word for word in tokens if word in emotion_words]
+    emotion_list = [word for word in lemmas if word in emotion_words]
     return emotion_list
