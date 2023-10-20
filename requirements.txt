@@ -1,3 +1,4 @@
+opencv-python
 keyboard
 numpy
 openai-whisper
