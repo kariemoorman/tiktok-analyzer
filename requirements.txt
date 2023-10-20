@@ -9,3 +9,4 @@ selenium
 spacy
 SpeechRecognition
 tqdm
+unittest
