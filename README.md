@@ -1,6 +1,8 @@
 ## TikTok-Teller
 #### Description: TikTok Video Scraping and Content Analysis Tool
 
+Search & download Tiktok videos by username and/or video tag, and analyze video contents. Transcribe video speech to text and perform NLP analysis tasks (e.g., keyword and topic discovery; emotion/sentiment analysis). Isolate audio signal and perform signal processing analysis tasks (e.g., pitch, prosody and sentiment analysis). Isolate visual stream and perform image tasks (e.g., object detection; face detection).
+
 ---
 ### Repository Contents
 - <b>TikTok Video Scrapers</b>
