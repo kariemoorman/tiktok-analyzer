@@ -69,8 +69,6 @@ class TikTokVideoDownloader:
     def download_videos_selenium(self, driver):
         #comment_scraper_url = 'https://ssstik.io/en'
         # Specify Selenium Driver
-        
-        
         if driver == 'chrome':
             CHROMEDRIVER_PATH = ""
             CHROME_PATH = ""
@@ -92,7 +90,7 @@ class TikTokVideoDownloader:
             WINDOW_SIZE = "1920,1080"
             options = FirefoxOptions()
             options.add_argument(f"user-agent={self.user_agent}")
-            #options.add_argument("--headless")  
+            options.add_argument("--headless")  
             options.add_argument("--window-size=%s" % WINDOW_SIZE)
 
             driver = webdriver.Firefox(options=options)
