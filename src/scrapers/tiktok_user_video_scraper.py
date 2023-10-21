@@ -14,7 +14,7 @@ from selenium.webdriver.common.by import By
 from pyppeteer import launch
 
 
-class TikTokScraper:
+class TikTokUserVideoScraper:
     ''' 
     Function:
     For each username in username list, extract username, bio, video URLs.
@@ -139,7 +139,7 @@ def main():
     parser.add_argument("--output_file_format", "-o", type=str, choices=["csv", "json", "parquet"], default="csv", help="Choose output file format.")
     args = parser.parse_args()
 
-    scraper = TikTokScraper(args.browser, args.output_file_format)
+    scraper = TikTokUserVideoScraper(args.browser, args.output_file_format)
     asyncio.get_event_loop().run_until_complete(scraper.scrape_user_video(args.usernames))
 
 
