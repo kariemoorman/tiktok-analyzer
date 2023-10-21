@@ -14,6 +14,11 @@ Search & download Tiktok videos by username and/or video tag, and analyze video 
     Choose either Selenium or Pyppeteer to dynamically scrape TikTok videos for one or more Tiktok tags.  
     E.g., ```python3 tiktok_tag_video_scraper.py physics lhc -b pyppeteer -o csv```
 
+  - [tiktok_video_metadata_scraper.py](https://github.com/kariemoorman/tiktok-teller/blob/main/src/scrapers/tiktok_video_metadata_scraper.py)
+    Export metadata from a Tiktok video.  
+    E.g., ```python3 tiktok_video_metadata_scraper.py <url>```
+    
+
 - <b>TikTok Video Downloader</b>
   - [tiktok_downloader.py](https://github.com/kariemoorman/tiktok-teller/blob/main/src/downloaders/tiktok_downloader.py) 
     Choose either Selenium or Pyppeteer to dynamically download one or more Tiktok videos.  
