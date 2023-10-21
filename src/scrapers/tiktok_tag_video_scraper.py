@@ -14,7 +14,7 @@ from selenium.webdriver.common.by import By
 from pyppeteer import launch
 
 
-class TikTokScraper:
+class TiktokTagVideoScraper:
     ''' 
     Function:
     For each tag in tag list, extract video title and video URL.
@@ -171,7 +171,7 @@ def main():
     parser.add_argument("--output_file_format", "-o", type=str, choices=["csv", "json", "parquet"], default="csv", help="Choose output file format.")
     args = parser.parse_args()
 
-    scraper = TikTokScraper(args.browser, args.driver, args.output_file_format)
+    scraper = TiktokTagVideoScraper(args.browser, args.driver, args.output_file_format)
     asyncio.get_event_loop().run_until_complete(scraper.scrape_tag_video(args.tags))
 
 
