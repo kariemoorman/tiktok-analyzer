@@ -8,7 +8,7 @@ from src.downloaders.tiktok_downloader import TikTokVideoDownloader
 class TestTikTokVideoDownloader(unittest.TestCase):
     @patch('src.downloaders.tiktok_downloader.launch')
     def test_pyppeteer_tiktok_video_downloader(self, mock_launch):
-        url = ["https://www.tiktok.com/@srhoe/video/7288795368760823070"]
+        url = ["https://www.tiktok.com/@eczachly/video/7287391598629981482"]
         downloader = TikTokVideoDownloader(url)
         downloader.download_tiktok_videos(browser="pyppeteer")
         self.assertEqual(mock_launch.call_count, 1)
