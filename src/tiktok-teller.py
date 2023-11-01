@@ -55,7 +55,7 @@ def main():
         if user_input == '1':
             print("\nYou selected option 1.\n")
             url = input("Enter tiktok video URL: ")
-            downloader = TikTokVideoDownloader([f'{url}'])
+            downloader = TikTokVideoDownloader([str(url)])
             downloader.download_tiktok_videos(browser='pyppeteer')
 
         elif user_input == '2':
@@ -85,7 +85,8 @@ def main():
             print("\nExiting the program. Goodbye!\n")
             break 
         
-
+        else:
+            print("\n")
 
 if __name__ == "__main__":
     main()
