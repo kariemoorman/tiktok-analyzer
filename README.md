@@ -36,6 +36,35 @@ pip install -r requirements.txt
 python src/tiktok-teller.py
 ```
 
+
+---
+
+### Example Use Cases 
+
+#### Option 1: Download Tiktok Video. 
+
+- Input URL: https://www.tiktok.com/@bytesiz3/video/7290398845777825070
+- Output: 
+  - Metadata: [@bytesiz3_video_7290398845777825070_metadata.json](https://github.com/kariemoorman/tiktok-teller/blob/main/example_data/%40bytesiz3_video_7290398845777825070_metadata.json)
+  - MP4: [ssstik.io_1698796057176.mp4](https://github.com/kariemoorman/tiktok-teller/blob/main/example_data/ssstik.io_1698796057176.mp4)
+
+#### Option 2: Transcribe Tiktok Video.
+
+- Input MP4: [ssstik.io_1698796057176.mp4](https://github.com/kariemoorman/tiktok-teller/blob/main/example_data/ssstik.io_1698796057176.mp4)
+- Output:
+  - JSON: [ssstik.io_1698796057176.json](https://github.com/kariemoorman/tiktok-teller/blob/main/example_data/ssstik.io_1698796057176.json)
+  - CSV: [ssstik.io_1698796057176.csv](https://github.com/kariemoorman/tiktok-teller/blob/main/example_data/ssstik.io_1698796057176.csv)
+  - MP3: [ssstik.io_1698796057176.mp3](https://github.com/kariemoorman/tiktok-teller/blob/main/example_data/ssstik.io_1698796057176.mp3)
+
+#### Option 3: Analyze Tiktok Video.
+- Input MP4: [ssstik.io_1698796057176.mp4](https://github.com/kariemoorman/tiktok-teller/blob/main/example_data/ssstik.io_1698796057176.mp4)
+- Output: 
+  - Face Detection: 
+    - MP4: [ssstik.io_1698796057176.mp4.cv_output.mp4](https://github.com/kariemoorman/tiktok-teller/blob/main/example_data/ssstik.io_1698796057176.mp4.cv_output.mp4)
+    - Faces Directory: [ssstik.io_1698796057176_faces/](https://github.com/kariemoorman/tiktok-teller/tree/main/example_data/ssstik.io_1698796057176_faces)
+  - NLP:
+    - Sentiment analysis: [ssstik.io_1698796057176.sentiment_analysis.txt](https://github.com/kariemoorman/tiktok-teller/blob/main/example_data/ssstik.io_1698796057176.sentiment_analysis.txt)
+
 ---
 ### Repository Contents
 - <b>TikTok Video Scrapers</b>
