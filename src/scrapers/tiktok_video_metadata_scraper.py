@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import re
+import os
 import asyncio
 import json
 import argparse
@@ -13,13 +14,14 @@ class TiktokVideoMetadataScraper:
     def output_file(self):
         pattern = r'https://www\.tiktok\.com/(@\w+)/video/(\d+)'
         match = re.search(pattern, self.url)
+        downloads_dir = os.path.expanduser("~" + os.path.sep + "Downloads/")
         if match:
             transformed_string = f"{match.group(1)}_video_{match.group(2)}"
-        return transformed_string + "_metadata.json"
+        return downloads_dir + transformed_string + "_metadata.json"
             
 
     async def scroll_to_end_pyppeteer(self, page):
-        SCROLL_PAUSE_TIME = 30
+        SCROLL_PAUSE_TIME = 50
         last_height = await page.evaluate('() => document.body.scrollHeight')
         while True:
             await page.evaluate('window.scrollBy(0, document.body.scrollHeight);')
@@ -32,7 +34,7 @@ class TiktokVideoMetadataScraper:
     async def scrape_data_and_save_to_json(self):
         browser = await launch(headless=True)
         page = await browser.newPage()
-
+        print('\nScraping video metadata...')
         try:
             await page.goto(self.url)
             await self.scroll_to_end_pyppeteer(page)
@@ -43,8 +45,13 @@ class TiktokVideoMetadataScraper:
             music = await page.querySelectorAllEval('a[href*="music"]', 'nodes => nodes.map(node => node.href)')
             place = await page.querySelectorAllEval('a[href*="place"]', 'nodes => nodes.map(node => node.href)')
             content = await page.content()
-            pattern = r'(\d+\.\d+[Kk]? Likes, \d+ Comments)'
-            matches = re.search(pattern, content).group(1)
+            #pattern = r'(\d+\.\d+[Kk]? Likes, \d+ Comments)'
+            pattern = r'(?<=content=")(\d+ Likes)'
+            match = re.search(pattern, content)
+            if match:
+                matches = match.group()
+            else:
+                matches = None
 
             data = {
                 "video_url": self.url,
@@ -54,13 +61,13 @@ class TiktokVideoMetadataScraper:
                 "music": music,
                 "place": place,
                 "traffic": matches,
-                #"content": [content],
+                "content": [content],
             }
 
             with open(self.output_file, 'w') as json_file:
                 json.dump(data, json_file, indent=2)
 
-            print(f"Scraped data saved to {self.output_file}")
+            print(f"Scraped metadata saved to {self.output_file}.\n")
 
         finally:
             await browser.close()

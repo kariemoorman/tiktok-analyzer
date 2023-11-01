@@ -1,5 +1,5 @@
 import json
-
+import asyncio
 from downloaders.tiktok_downloader import TikTokVideoDownloader
 from scrapers.tiktok_video_metadata_scraper import TiktokVideoMetadataScraper
 from transcribers.tiktok_video_to_text import SpeechConverter
@@ -54,19 +54,21 @@ def main():
 
         # Check the user's input and perform tasks accordingly
         if user_input == '1':
-            print("\nYou selected option 1.\n")
+            print("\nYou selected option 1: 'Download a Tiktok Video.'\n")
             url = input("Enter tiktok video URL: ")
+            scraper = TiktokVideoMetadataScraper(str(url))
+            asyncio.get_event_loop().run_until_complete(scraper.scrape_data_and_save_to_json())
             downloader = TikTokVideoDownloader([str(url)])
             downloader.download_tiktok_videos(browser='pyppeteer')
 
         elif user_input == '2':
-            print("\nYou selected option 2. \n")
+            print("\nYou selected option 2: 'Transcribe a Tiktok Video.'\n")
             mp4 = input("Enter mp4 filepath: ")
             speech_converter = SpeechConverter(f'{mp4}')
             speech_converter.extract_and_transform_speech()
 
         elif user_input == '3':
-            print("\nYou selected option 3.\n")
+            print("\nYou selected option 3: 'Analyze a Tiktok Video.'\n")
             face_detection = input("Do you want face detection? (y/n): ")
             nlp = input("Do you want NLP? (y/n): ")
             if face_detection in ['y', 'yes', 'Y', 'YES', 'Yes']:
