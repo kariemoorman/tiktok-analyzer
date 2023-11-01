@@ -113,8 +113,8 @@ class SentimentAnalyzer:
 def main(): 
     
     parser = argparse.ArgumentParser(description="Analyze comments for sentiment, emotion, and derogatory content.")
-    parser.add_argument("-t", "--text", help="List of sentences to analyze")
-    parser.add_argument("-f", "--filepath", help="Filepath")
+    parser.add_argument("-t", "--text", help="Text document to analyze.")
+    parser.add_argument("-f", "--filepath", help="Filepath.")
     args = parser.parse_args()
     
     analyzer = SentimentAnalyzer()
