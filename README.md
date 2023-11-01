@@ -36,6 +36,12 @@ Search & download Tiktok videos by username and/or video tag, and analyze video 
     Conduct face detection task on Tiktok video (in mp4 format).  
       E.g., ```python3 face_detection.py <video.mp4> -o 'output/file/path'```
 
+- <b>TikTok Sentiment Analysis</b>
+  - [sentiment_analysis.py](https://github.com/kariemoorman/tiktok-teller/blob/main/src/nlp/sentiment_analysis.py)  
+    Conduct sentiment analysis tasks on Tiktok video transcription data.  
+      E.g., ```python3 sentiment_analysis.py -t <document> -f 'output/file/path'```
+    
+
 ---
 
 <p align='center'><b>License: <a href='https://choosealicense.com/licenses/gpl-3.0/'>GNU General 
