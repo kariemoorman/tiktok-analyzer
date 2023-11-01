@@ -1,4 +1,4 @@
-## TikTok-Teller: TikTok Video Scraping and Content Analysis Tool
+## TikTok-Teller: A TikTok Video Scraping and Content Analysis Tool
 
 <img src='https://github.com/kariemoorman/tiktok-teller/blob/main/tiktok-teller.png'>
 
