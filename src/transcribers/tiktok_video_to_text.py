@@ -2,6 +2,7 @@
 
 import re
 import csv
+import pandas as pd
 import json
 import time
 import timeit
@@ -85,18 +86,19 @@ class SpeechConverter:
                 print(f"An error occurred: {e}")
                 return None
 
-
     def save_as_json(self, text, output_file):
         with open(output_file, 'w') as json_file:
             json.dump(text, json_file, indent=4)
         print(f"\nData saved as JSON: {output_file}.\n")
 
     def save_as_csv(self, text, output_file):
-        with open(output_file, 'w', newline='') as csv_file:
-            csv_writer = csv.writer(csv_file)
-            csv_writer.writerow(['Text'])
-            for item in text:
-                csv_writer.writerow([item])
+        df = pd.DataFrame(text)
+        df.to_csv(f"{output_file}", index=False)
+        # with open(output_file, 'w', newline='') as csv_file:
+        #     csv_writer = csv.writer(csv_file)
+        #     csv_writer.writerow(['Text'])
+        #     for item in text:
+        #         csv_writer.writerow([item])
         print(f"Data saved as CSV: {output_file}.\n")
     
     def extract_and_transform_speech(self): 
@@ -109,7 +111,8 @@ class SpeechConverter:
             # Save as JSON
             self.save_as_json({"text": extracted_text}, f"{self.basefilepath}.json")
             # Save as CSV
-            self.save_as_csv([extracted_text], f"{self.basefilepath}.csv")
+            self.save_as_csv(extracted_text, f"{self.basefilepath}.csv")
+        return extracted_text['text']
         
 def main(): 
     parser = argparse.ArgumentParser(description="Tiktok Video Speech and Text Extraction.")

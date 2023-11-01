@@ -1,8 +1,11 @@
+import json
+
 from downloaders.tiktok_downloader import TikTokVideoDownloader
 from scrapers.tiktok_video_metadata_scraper import TiktokVideoMetadataScraper
 from transcribers.tiktok_video_to_text import SpeechConverter
 from nlp.keyword_extractor import extract_keywords
 from nlp.emotion_extractor import filter_words
+from nlp.sentiment_analysis import SentimentAnalyzer
 from cv.face_detection import FaceDetection
 
 def main():
@@ -69,17 +72,26 @@ def main():
             face_detection = input("Do you want face detection? (y/n): ")
             nlp = input("Do you want NLP? (y/n): ")
             if face_detection in ['y', 'yes', 'Y', 'YES', 'Yes']:
+                print('\nRad...\n')
                 mp4 = input("Enter mp4 filepath: ")
-                output_directory = input("Enter output directory: ")
-                detector = FaceDetection(mp4, output_directory)
+                detector = FaceDetection(mp4)
                 detector.detect_faces()
             else:
                 pass
             if nlp in ['y', 'yes', 'Y', 'YES', 'Yes']:
-                print('cool')
+                print('\nCool...\n')
+                filepath = input("Enter your data filepath: ")
+                if filepath.endswith('.mp4'):
+                    speech_converter = SpeechConverter(f'{filepath}')
+                    text = speech_converter.extract_and_transform_speech()
+                elif filepath.endswith('.json'): 
+                    with open(f'{filepath}', 'r') as file:
+                        data = json.load(file)
+                    text = data['text']['text']
+                analyzer = SentimentAnalyzer()
+                analyzer.analyze_comments(text, filepath)
             else:
                 pass                
-            
 
         elif user_input.lower() == 'exit':
             print("\nExiting the program. Goodbye!\n")

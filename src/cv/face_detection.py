@@ -10,10 +10,10 @@ import argparse
 #    -  #https://github.com/opencv/opencv/blob/4.x/data/haarcascades/haarcascade_profileface.xml
 
 class FaceDetection:
-    def __init__(self, video_filepath, output_directory, classifier_path='./haarcascade_frontalface_default.xml'):
+    def __init__(self, video_filepath, classifier_path='./haarcascade_frontalface_default.xml'):
         self.face_cascade = cv2.CascadeClassifier(classifier_path)
         self.video_filepath = video_filepath
-        self.output_directory = output_directory
+        self.output_directory = f'{os.path.dirname(video_filepath)}/{os.path.splitext(os.path.basename(video_filepath))[0]}_faces'
 
     def detect_faces(self):
         os.makedirs(self.output_directory, exist_ok=True)
@@ -58,9 +58,9 @@ class FaceDetection:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Face Detection in Video Stream")
     parser.add_argument("video_filepath", help="Path to the input video file")
-    parser.add_argument("-o", "--output-directory", help="Output directory for saving images of detected faces")
+    #parser.add_argument("-o", "--output-directory", default='faces', help="Output directory for saving images of detected faces")
     
     args = parser.parse_args()
     
-    detector = FaceDetection(args.video_filepath, args.output_directory)
+    detector = FaceDetection(args.video_filepath)
     detector.detect_faces()
