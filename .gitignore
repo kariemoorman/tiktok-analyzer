@@ -22,5 +22,7 @@ venv.bak/
 # Distribution / packaging
 __data/
 wheels/
-
 temp/
+
+# Logs
+geckodriver.log
