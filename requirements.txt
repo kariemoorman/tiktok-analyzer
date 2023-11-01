@@ -8,6 +8,7 @@ pyppeteer
 regex
 selenium
 spacy
+spacytextblob
 SpeechRecognition
 tqdm
 unittest
