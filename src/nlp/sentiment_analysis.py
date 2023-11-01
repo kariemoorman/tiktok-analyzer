@@ -96,7 +96,7 @@ class SentimentAnalyzer:
             output.write(f"\nNoun Phrases: {noun_phrases}\n")
             output.write(f"\nPrepositional Phrases: {prep_phrases}\n")
             output.write(f"\nVerb Phrases: {verb_phrases}\n")
-            output.write(f'\n Emotion: Words: {emotion_list}\n')
+            output.write(f'\nEmotion: Words: {emotion_list}\n')
             for sentence in sentences:
                 sentiment, has_emotion, is_derogatory, derogatory_score = self.nltk_analyzer(sentence)
                 spacy_analysis = self.spacy_analyzer(sentence)
