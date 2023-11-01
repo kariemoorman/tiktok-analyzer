@@ -8,6 +8,35 @@
 Search & download Tiktok videos by username and/or video tag, and analyze video contents. Transcribe video speech to text and perform NLP analysis tasks (e.g., keyword and topic discovery; emotion/sentiment analysis). Isolate audio signal and perform signal processing analysis tasks (e.g., pitch, prosody and sentiment analysis). Isolate visual stream and perform image tasks (e.g., object detection; face detection).
 
 ---
+
+### Installation & Use
+
+- Clone or download .zip of `tiktok-teller` python package.
+```
+git clone https://github.com/kariemoorman/tiktok-teller.git
+```
+
+- Create a virtual environment inside the `tiktok-teller` directory.
+```
+cd tiktok-teller && python3 -m venv .venv 
+```
+
+- Activate virtual environment.  
+```
+source .venv/bin/activate
+```
+
+- Install package dependencies. 
+```
+pip install -r requirements.txt
+```
+
+- Execute `tiktok-teller` program.
+```
+python src/tiktok-teller.py
+```
+
+---
 ### Repository Contents
 - <b>TikTok Video Scrapers</b>
   - [tiktok_user_video_scraper.py](https://github.com/kariemoorman/tiktok-teller/blob/main/src/scrapers/tiktok_user_video_scraper.py)  
