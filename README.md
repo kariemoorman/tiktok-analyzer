@@ -1,7 +1,8 @@
-## TikTok-Teller
-#### Description: TikTok Video Scraping and Content Analysis Tool
+## TikTok-Teller: TikTok Video Scraping and Content Analysis Tool
 
 <img src='https://github.com/kariemoorman/tiktok-teller/blob/main/tiktok-teller.png'>
+
+#### Description:
 
 Search & download Tiktok videos by username and/or video tag, and analyze video contents. Transcribe video speech to text and perform NLP analysis tasks (e.g., keyword and topic discovery; emotion/sentiment analysis). Isolate audio signal and perform signal processing analysis tasks (e.g., pitch, prosody and sentiment analysis). Isolate visual stream and perform image tasks (e.g., object detection; face detection).
 
@@ -10,7 +11,7 @@ Search & download Tiktok videos by username and/or video tag, and analyze video 
 - <b>TikTok Video Scrapers</b>
   - [tiktok_user_video_scraper.py](https://github.com/kariemoorman/tiktok-teller/blob/main/src/scrapers/tiktok_user_video_scraper.py)  
     Choose either Selenium or Pyppeteer to dynamically scrape TikTok videos for one or more Tiktok usernames.  
-      E.g., ```python3 tiktok_user_video_scraper.py blitzphd eczachly -b pyppeteer -o csv```
+      E.g., ```python3 tiktok_user_video_scraper.py <username> <username> -b pyppeteer -o csv```
 
   - [tiktok_tag_video_scraper.py](https://github.com/kariemoorman/tiktok-teller/blob/main/src/scrapers/tiktok_tag_video_scraper.py)
     Choose either Selenium or Pyppeteer to dynamically scrape TikTok videos for one or more Tiktok tags.  
@@ -18,13 +19,13 @@ Search & download Tiktok videos by username and/or video tag, and analyze video 
 
   - [tiktok_video_metadata_scraper.py](https://github.com/kariemoorman/tiktok-teller/blob/main/src/scrapers/tiktok_video_metadata_scraper.py)
     Export metadata from a Tiktok video.  
-    E.g., ```python3 tiktok_video_metadata_scraper.py <url>```
+    E.g., ```python3 tiktok_video_metadata_scraper.py <tiktok_video_url>```
     
 
 - <b>TikTok Video Downloader</b>
   - [tiktok_downloader.py](https://github.com/kariemoorman/tiktok-teller/blob/main/src/downloaders/tiktok_downloader.py) 
     Choose either Selenium or Pyppeteer to dynamically download one or more Tiktok videos.  
-      E.g., ```python3 tiktok_downloader.py <url> -b selenium -d firefox```
+      E.g., ```python3 tiktok_downloader.py <tiktok_video_url> -b selenium -d firefox```
 
 - <b>TikTok Video Speech Transcriber</b>
   - [tiktok_video_to_text.py](https://github.com/kariemoorman/tiktok-teller/blob/main/src/transcribers/tiktok_video_to_text.py)  
@@ -39,7 +40,7 @@ Search & download Tiktok videos by username and/or video tag, and analyze video 
 - <b>TikTok Sentiment Analysis</b>
   - [sentiment_analysis.py](https://github.com/kariemoorman/tiktok-teller/blob/main/src/nlp/sentiment_analysis.py)  
     Conduct sentiment analysis tasks on Tiktok video transcription data.  
-      E.g., ```python3 sentiment_analysis.py -t <document> -f 'output/file/path'```
+      E.g., ```python3 sentiment_analysis.py -t <document> -f 'output/file/path/filename.mp4/json'```
     
 
 ---
