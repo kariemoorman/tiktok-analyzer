@@ -9,6 +9,8 @@ from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 import spacy
 from spacytextblob.spacytextblob import SpacyTextBlob
+from nlp.keyword_extractor import extract_keywords
+from nlp.emotion_extractor import filter_words, emotion_adjs, emotion_nouns, emotion_verbs
 
 nltk.download('punkt')
 nltk.download('stopwords')
@@ -56,7 +58,7 @@ class SentimentAnalyzer:
         sia = SentimentIntensityAnalyzer()
         sentiment_score = sia.polarity_scores(sentence)['compound']
 
-        emotion_words = ['happy', 'sad', 'angry', 'excited', 'fearful', 'hate']
+        emotion_words = emotion_adjs + emotion_verbs + emotion_nouns #['happy', 'sad', 'angry', 'excited', 'fearful', 'hate']
         emotion_found = any(word in words for word in emotion_words)
 
         derogatory_phrases = self.derogatory_word_weights.keys()
@@ -73,15 +75,28 @@ class SentimentAnalyzer:
             "Emotion_words": doc._.blob.sentiment_assessments.assessments
         }
 
-    def analyze_comments(self, filepath):
+    def analyze_comments(self, text, filepath):
         base_filename = os.path.splitext(filepath)[0]
         output_file = f'{base_filename}.sentiment_analysis.txt'
-        if filepath.endswith('.json'):
-            text = self.open_json(filepath)
+        # if filepath.endswith('.json'):
+        #     text = self.open_json(filepath)
+        emotion_list = filter_words(text)
+        tokens, lemmas, dets, nouns, verbs, adjs, advs, noun_phrases, prep_phrases, verb_phrases = extract_keywords(text)
         sentences = re.split(r'(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?|\!)\s', text)
         with open(output_file, 'w') as output:
             output.write(f'Filename: {filepath}\n')
             output.write(f'\nText: {text}\n')
+            output.write(f"\nTokens: {tokens}\n")
+            output.write(f"\nLemmas: {lemmas}\n")
+            output.write(f"\nDeterminers (Dets): {dets}\n")
+            output.write(f"\nNouns: {nouns}\n")
+            output.write(f"\nVerbs: {verbs}\n")
+            output.write(f"\nAdjectives (Adjs): {adjs}\n")
+            output.write(f"\nAdverbs (Advs): {advs}\n")
+            output.write(f"\nNoun Phrases: {noun_phrases}\n")
+            output.write(f"\nPrepositional Phrases: {prep_phrases}\n")
+            output.write(f"\nVerb Phrases: {verb_phrases}\n")
+            output.write(f'\n Emotion: Words: {emotion_list}\n')
             for sentence in sentences:
                 sentiment, has_emotion, is_derogatory, derogatory_score = self.nltk_analyzer(sentence)
                 spacy_analysis = self.spacy_analyzer(sentence)
@@ -93,15 +108,17 @@ class SentimentAnalyzer:
                 for key, value in spacy_analysis.items():
                     output.write(f"{key}: {value}\n")
                 output.write("-" * 30 + "\n")
+        print(f'Data saved as TXT: {output_file}.\n')
 
 def main(): 
     
     parser = argparse.ArgumentParser(description="Analyze comments for sentiment, emotion, and derogatory content.")
-    parser.add_argument("-f", "--filepath", help="List of sentences to analyze")
+    parser.add_argument("-t", "--text", help="List of sentences to analyze")
+    parser.add_argument("-f", "--filepath", help="Filepath")
     args = parser.parse_args()
     
     analyzer = SentimentAnalyzer()
-    analyzer.analyze_comments(args.filepath)
+    analyzer.analyze_comments(args.text, args.filepath)
     
 if __name__ == "__main__":
     main()

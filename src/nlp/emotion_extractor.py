@@ -23,8 +23,8 @@ emotion_adjs = [
     "Shy", "Excited", "Lethargic", "Astonished", "Exhilarated", "Wistful", "Numb", "Playful", 
     "Hostile", "Cautious", "Grateful", "Enchanted", "Alienated", "Scared", "Fearful", "Petrified",
     "Caring", "Composed", "Considerate", "Ecstatic", "Enthusiastic", "Overwhelmed", "Radiant", 
-    "Thoughtful", "Captivated", "Impulsive", "Devoted", "Zestful", "Inspired", "Rapturous", 
-    "Reflective", "Desolate", "Desperate", "Flabbergasted", "Forlorn", "Heedless", "Hollow", 
+    "Thoughtful", "Captivated", "Impulsive", "Devoted", "Zestful", "Inspired", "Rapturous", "Safe",
+    "Reflective", "Desolate", "Desperate", "Flabbergasted", "Forlorn", "Heedless", "Hollow", "Unsafe",
     "Introspective", "Lively", "Malcontent", "Mournful", "Ominous", "Passionate", "Receptive", 
     "Scornful", "Sentimental", "Spellbound", "Unnerved", "Vexed", "Zealous", "Rad", "Awesome", "Obnoxious"
     ]
