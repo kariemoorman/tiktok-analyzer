@@ -1,0 +1,105 @@
+Filename: /Users/karie/ssstik.io_1698796057176.mp4
+
+Text:  How you can check up a URL is safe. Go to Google and type transparency report. You can enter. Click this first one. We're going to go to Google safe browsing. Site status. And here you can enter the URL. Stay safe, follow for more.
+
+Tokens: ['how', 'you', 'can', 'check', 'up', 'a', 'url', 'is', 'safe', 'go', 'to', 'google', 'and', 'type', 'transparency', 'report', 'you', 'can', 'enter', 'click', 'this', 'first', 'one', 'we', 'going', 'to', 'go', 'to', 'google', 'safe', 'browsing', 'site', 'status', 'and', 'here', 'you', 'can', 'enter', 'the', 'url', 'stay', 'safe', 'follow', 'for', 'more']
+
+Lemmas: ['how', 'you', 'can', 'check', 'up', 'a', 'url', 'be', 'safe', 'go', 'to', 'google', 'and', 'type', 'transparency', 'report', 'you', 'can', 'enter', 'click', 'this', 'first', 'one', 'we', 'go', 'to', 'go', 'to', 'google', 'safe', 'browsing', 'site', 'status', 'and', 'here', 'you', 'can', 'enter', 'the', 'url', 'stay', 'safe', 'follow', 'for', 'more']
+
+Determiners (Dets): ['a', 'this', 'the']
+
+Nouns: ['url', 'type', 'transparency', 'report', 'browsing', 'site', 'status', 'url']
+
+Verbs: ['check', 'go', 'enter', 'click', 'go', 'go', 'google', 'enter', 'stay', 'follow']
+
+Adjectives (Adjs): ['safe', 'first', 'safe', 'safe', 'more']
+
+Adverbs (Advs): ['here']
+
+Noun Phrases: ['you', 'a url', 'google and type transparency report', 'you', 'we', 'safe browsing', 'site status', 'you', 'the url']
+
+Prepositional Phrases: ['to go', 'for follow']
+
+Verb Phrases: ['check', 'go', 'enter', 'click', 'going go google', 'go google', 'google', 'here enter', 'stay follow', 'follow']
+
+ Emotion: Words: ['safe', 'safe', 'safe']
+
+Sentence:  How you can check up a URL is safe.
+Sentiment Score: 0.4404
+Has Emotion: True
+Is Derogatory: False
+Derogatory Score: 0.00
+Polarity: 0.5
+Subjectivity: 0.5
+Emotion_words: [(['safe'], 0.5, 0.5, None)]
+------------------------------
+
+Sentence: Go to Google and type transparency report.
+Sentiment Score: 0.0
+Has Emotion: False
+Is Derogatory: False
+Derogatory Score: 0.00
+Polarity: 0.0
+Subjectivity: 0.0
+Emotion_words: []
+------------------------------
+
+Sentence: You can enter.
+Sentiment Score: 0.0
+Has Emotion: False
+Is Derogatory: False
+Derogatory Score: 0.00
+Polarity: 0.0
+Subjectivity: 0.0
+Emotion_words: []
+------------------------------
+
+Sentence: Click this first one.
+Sentiment Score: 0.0
+Has Emotion: False
+Is Derogatory: False
+Derogatory Score: 0.00
+Polarity: 0.25
+Subjectivity: 0.3333333333333333
+Emotion_words: [(['first'], 0.25, 0.3333333333333333, None)]
+------------------------------
+
+Sentence: We're going to go to Google safe browsing.
+Sentiment Score: 0.4404
+Has Emotion: True
+Is Derogatory: False
+Derogatory Score: 0.00
+Polarity: 0.5
+Subjectivity: 0.5
+Emotion_words: [(['safe'], 0.5, 0.5, None)]
+------------------------------
+
+Sentence: Site status.
+Sentiment Score: 0.0
+Has Emotion: False
+Is Derogatory: False
+Derogatory Score: 0.00
+Polarity: 0.0
+Subjectivity: 0.0
+Emotion_words: []
+------------------------------
+
+Sentence: And here you can enter the URL.
+Sentiment Score: 0.0
+Has Emotion: False
+Is Derogatory: False
+Derogatory Score: 0.00
+Polarity: 0.0
+Subjectivity: 0.0
+Emotion_words: []
+------------------------------
+
+Sentence: Stay safe, follow for more.
+Sentiment Score: 0.4404
+Has Emotion: True
+Is Derogatory: False
+Derogatory Score: 0.00
+Polarity: 0.5
+Subjectivity: 0.5
+Emotion_words: [(['safe'], 0.5, 0.5, None), (['more'], 0.5, 0.5, None)]
+------------------------------
