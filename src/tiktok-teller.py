@@ -3,8 +3,6 @@ import json
 from downloaders.tiktok_downloader import TikTokVideoDownloader
 from scrapers.tiktok_video_metadata_scraper import TiktokVideoMetadataScraper
 from transcribers.tiktok_video_to_text import SpeechConverter
-from nlp.keyword_extractor import extract_keywords
-from nlp.emotion_extractor import filter_words
 from nlp.sentiment_analysis import SentimentAnalyzer
 from cv.face_detection import FaceDetection
 
