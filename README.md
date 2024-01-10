@@ -1,7 +1,7 @@
 <h2 align='center'>TikTok-Analyzer: A TikTok Video Scraping and Content Analysis Tool</h2>
 
 
-<!--<p align='center'><img src='https://github.com/kariemoorman/tiktok-analyzer/blob/main/tiktok-teller.png' alt="Tiktok-Teller" width='50%;' ></p>-->
+<p align='center'><img src='https://github.com/kariemoorman/tiktok-analyzer/blob/main/tiktok-analyzer.png' alt="Tiktok-Teller" width='50%;' ></p>
 
 #### Description:
 
