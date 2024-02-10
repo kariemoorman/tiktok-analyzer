@@ -11,6 +11,8 @@ Search & download Tiktok videos by username and/or video tag, and analyze video 
 
 ### Installation & Use
 
+#### Virtual Env
+
 - Clone or download .zip of `tiktok-analyzer` python package.
 ```
 git clone https://github.com/kariemoorman/tiktok-analyzer.git
@@ -36,6 +38,22 @@ pip install -r requirements.txt
 python src/tiktok-analyzer.py
 ```
 
+#### Docker Image
+
+- Clone or download .zip of `tiktok-analyzer` python package.
+```
+git clone https://github.com/kariemoorman/tiktok-analyzer.git
+```
+
+- Build Docker image.
+```
+docker build -t tt-analyzer .
+```
+
+- Run Docker image as container.
+```
+docker run --rm -ti tt-analyzer
+```
 
 ---
 
