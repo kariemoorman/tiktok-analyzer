@@ -1,7 +1,7 @@
 keyboard==0.13.5
 numpy==1.26.3
 openai-whisper==20231117
-opencv-python==4.9.0.80
+#opencv-python==4.9.0.80
 pandas==2.1.4
 pydub==0.25.1
 pyppeteer==1.0.2
