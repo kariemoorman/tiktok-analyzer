@@ -3,9 +3,16 @@
 
 <p align='center'><img src='https://github.com/kariemoorman/tiktok-analyzer/blob/main/tiktok-analyzer.png' alt="Tiktok-Teller" width='50%;' ></p>
 
-#### Description:
+### Description
 
 Search & download Tiktok videos by username and/or video tag, and analyze video contents. Transcribe video speech to text and perform NLP analysis tasks (e.g., keyword and topic discovery; emotion/sentiment analysis). Isolate audio signal and perform signal processing analysis tasks (e.g., pitch, prosody and sentiment analysis). Isolate visual stream and perform image tasks (e.g., object detection; face detection).
+
+---
+
+### Python Toolkit
+- Web Scraping: [Pyppeteer](https://pyppeteer.github.io/pyppeteer/), [Selenium](https://www.selenium.dev/)
+- Transcription: [OpenAI Whisper](https://openai.com/research/whisper)
+- NLP: [SpaCy](https://spacy.io/), [NLTK](https://www.nltk.org/)
 
 ---
 
