@@ -13,6 +13,7 @@ Search & download Tiktok videos by username and/or video tag, and analyze video 
 - Web Scraping: [Pyppeteer](https://pyppeteer.github.io/pyppeteer/), [Selenium](https://www.selenium.dev/)
 - Transcription: [OpenAI Whisper](https://openai.com/research/whisper)
 - NLP: [SpaCy](https://spacy.io/), [NLTK](https://www.nltk.org/)
+- CV: [OpenCV](https://opencv.org/)
 
 ---
 
