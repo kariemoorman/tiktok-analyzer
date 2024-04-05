@@ -5,7 +5,6 @@ import csv
 import pandas as pd
 import json
 import time
-import timeit
 from tqdm import tqdm
 import subprocess
 import argparse
@@ -59,28 +58,20 @@ class SpeechConverter:
                 # Calculate the audio file duration for progress tracking
                 audio_duration = source.DURATION
                 audio_data = recognizer.record(source, duration=audio_duration)
-                # Initialize tqdm to track progress
-                # progress_bar = tqdm(total=100, desc="Converting speech to text", unit="%", dynamic_ncols=True)
                 try:
                     # Perform speech recognition
                     text = recognizer.recognize_google(audio_data)
-                    # progress_bar.update(audio_duration)
                     print("Text extraction successful.\n")
                     return text
                 except sr.UnknownValueError:
                     print("Speech recognition could not understand the audio.")
-                    # progress_bar.close()
                     return None
                 except sr.RequestError as e:
                     print("Could not request results from Google Web Speech API; {0}".format(e))
-                    #time.sleep(1)
-                    # progress_bar.close()
-                    #return recognizer.recognize_google(audio_data)
                     return None
         elif self.method == 'openai': 
             try:
                 result = self.model.transcribe(audio_file)
-                # print(result["text"])
                 return result
             except Exception as e:
                 print(f"An error occurred: {e}")
