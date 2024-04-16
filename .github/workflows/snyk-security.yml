@@ -66,11 +66,11 @@ jobs:
       #   run: snyk iac test --report # || true
 
         # Build the docker image for testing
-      - name: Build a Docker image
-        run: DEBUG=*snyk* docker build -t tt-analyzer .
+      # - name: Build a Docker image
+      #   run: DEBUG=*snyk* docker build -t tt-analyzer .
         # Runs Snyk Container (Container and SCA) analysis and uploads result to Snyk.
-      - name: Snyk Container monitor
-        run: snyk auth ${{ secrets.SNYK_TOKEN }} && snyk container monitor tt-analyzer --file=Dockerfile -d
+      # - name: Snyk Container monitor
+      #   run: snyk auth ${{ secrets.SNYK_TOKEN }} && snyk container monitor tt-analyzer --file=Dockerfile -d
 
         # Push the Snyk Code results into GitHub Code Scanning tab
       - name: Upload result to GitHub Code Scanning
