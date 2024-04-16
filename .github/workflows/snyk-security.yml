@@ -70,7 +70,7 @@ jobs:
         run: DEBUG=*snyk* docker build -t tt-analyzer .
         # Runs Snyk Container (Container and SCA) analysis and uploads result to Snyk.
       - name: Snyk Container monitor
-        run: DEBUG=*snyk*  snyk auth ${{ secrets.SNYK_TOKEN }} && snyk container monitor tt-analyzer --file=Dockerfile
+        run: snyk auth ${{ secrets.SNYK_TOKEN }} && snyk container monitor tt-analyzer --file=Dockerfile -d
 
         # Push the Snyk Code results into GitHub Code Scanning tab
       - name: Upload result to GitHub Code Scanning
