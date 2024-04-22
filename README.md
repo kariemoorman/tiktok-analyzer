@@ -39,6 +39,12 @@ source .venv/bin/activate
 - Install package dependencies. 
 ```
 pip install -r requirements.txt
+
+- Install Homebrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+- Install ffmpeg
+brew install ffmpeg
 ```
 
 - Execute `tiktok-analyzer` program.
