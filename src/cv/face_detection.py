@@ -9,8 +9,12 @@ import argparse
 ## For side profile (portrait) use the following link: 
 #    -  #https://github.com/opencv/opencv/blob/4.x/data/haarcascades/haarcascade_profileface.xml
 
+current_script_path =  os.path.abspath(__name__)
+cv2_base_dir = os.path.dirname(current_script_path)
+haar_model = os.path.join(cv2_base_dir, 'src/cv/haarcascade_frontalface_default.xml')
+
 class FaceDetection:
-    def __init__(self, video_filepath, classifier_path=f'/Users/{os.path.expanduser("~").split(os.path.sep)[-1]}/Projects/tiktok-teller/src/cv/haarcascade_frontalface_default.xml'):
+    def __init__(self, video_filepath, classifier_path=haar_model):
         self.face_cascade = cv2.CascadeClassifier(classifier_path)
         self.video_filepath = video_filepath
         self.output_directory = f'{os.path.dirname(video_filepath)}/{os.path.splitext(os.path.basename(video_filepath))[0]}_faces'
