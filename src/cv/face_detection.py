@@ -26,11 +26,10 @@ class FaceDetection:
         frame_width = int(cap.get(3))
         frame_height = int(cap.get(4))
 
-        file_name, file_extension = os.path.splitext(self.video_filepath)
-        file_name_wo_extension = os.path.basename(file_name)
+        file_name_wo_extension = f'{os.path.dirname(self.video_filepath)}/{os.path.splitext(os.path.basename(self.video_filepath))[0]}'
 
         fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-        out = cv2.VideoWriter(f'{file_name_wo_extension}.cv_output.mp4', fourcc, 20.0, (frame_width, frame_height))
+        out = cv2.VideoWriter(f'{file_name_wo_extension}-cv_output.mp4', fourcc, 20.0, (frame_width, frame_height))
 
         while True:
             ret, frame = cap.read()

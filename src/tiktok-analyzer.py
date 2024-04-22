@@ -62,17 +62,20 @@ def main():
         elif user_input == '3':
             print("\nYou selected option 3: 'Analyze a Tiktok Video.'\n")
             face_detection = input("Do you want face detection? (y/n): ")
+            print('\nRad...\n')
             nlp = input("Do you want NLP? (y/n): ")
+            print('\nCool...\n')
             if face_detection in ['y', 'yes', 'Y', 'YES', 'Yes']:
-                print('\nRad...\n')
                 mp4 = input("Enter mp4 filepath: ")
                 detector = FaceDetection(mp4)
                 detector.detect_faces()
             else:
-                pass
+                mp4 = None
             if nlp in ['y', 'yes', 'Y', 'YES', 'Yes']:
-                print('\nCool...\n')
-                filepath = input("Enter your data filepath: ")
+                if mp4 is None:
+                    filepath = input("Enter mp4 filepath: ")
+                else:
+                    filepath = mp4
                 if filepath.endswith('.mp4'):
                     speech_converter = SpeechConverter(f'{filepath}')
                     text = speech_converter.extract_and_transform_speech()
