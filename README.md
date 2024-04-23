@@ -109,7 +109,7 @@ docker run --rm -ti tt-analyzer
 </details>
 
 <details>
-<summary><b>TikTok Video Speech Transcribers</b></summary>
+<summary><b>Speech Transcription</b></summary>
 <br>
   
   - [tiktok_video_to_text.py](https://github.com/kariemoorman/tiktok-analyzer/blob/main/src/transcribers/tiktok_video_to_text.py)  
@@ -120,7 +120,7 @@ docker run --rm -ti tt-analyzer
 </details>
 
 <details>
-<summary><b>TikTok Video Object/Face Detection</b></summary>
+<summary><b>CV Object/Face Detection</b></summary>
 <br>
   
   - [face_detection.py](https://github.com/kariemoorman/tiktok-analyzer/blob/main/src/cv/face_detection.py)  
@@ -131,7 +131,7 @@ docker run --rm -ti tt-analyzer
 </details>
 
 <details>
-<summary><b>TikTok NLP Analysis</b></summary>
+<summary><b>NLP Analysis</b></summary>
 <br>
   
   - [sentiment_analysis.py](https://github.com/kariemoorman/tiktok-analyzer/blob/main/src/nlp/sentiment_analysis.py)  
