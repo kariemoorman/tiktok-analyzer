@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import cv2
 import os
 import uuid
@@ -11,16 +13,15 @@ import argparse
 
 current_script_path =  os.path.abspath(__name__)
 cv2_base_dir = os.path.dirname(current_script_path)
-haar_model = os.path.join(cv2_base_dir, 'src/cv/haarcascade_frontalface_default.xml')
+haar_model = os.path.join(cv2_base_dir, 'src/cv/models/haarcascade_frontalface_default.xml')
 
 class FaceDetection:
     def __init__(self, video_filepath, classifier_path=haar_model):
         self.face_cascade = cv2.CascadeClassifier(classifier_path)
-        self.video_filepath = video_filepath
+        self.video_filepath = video_filepath.strip()
         self.output_directory = f'{os.path.dirname(video_filepath)}/{os.path.splitext(os.path.basename(video_filepath))[0]}_faces'
 
     def detect_faces(self):
-        os.makedirs(self.output_directory, exist_ok=True)
         cap = cv2.VideoCapture(self.video_filepath)
 
         frame_width = int(cap.get(3))
@@ -42,7 +43,8 @@ class FaceDetection:
                 scaleFactor=1.1, minNeighbors=5,
                 minSize=(30, 30)
             )
-
+            
+            os.makedirs(self.output_directory, exist_ok=True)
             for (x, y, w, h) in faces:
                 cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 3)
 
@@ -52,7 +54,7 @@ class FaceDetection:
 
             out.write(frame)
 
-            cv2.imshow('Face Detection', frame)
+            #cv2.imshow('Face Detection', frame)
 
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
