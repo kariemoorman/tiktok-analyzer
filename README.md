@@ -19,7 +19,9 @@ Search & download Tiktok videos by username and/or video tag, and analyze video 
 
 ### Installation & Use
 
-#### Virtual Env
+<details>
+<summary><b>Virtual Env</b></summary>
+<br>
 
 - Clone or download .zip of `tiktok-analyzer` python package.
 ```
@@ -51,8 +53,11 @@ brew install ffmpeg
 ```
 python src/tiktok-analyzer.py
 ```
+</details>
 
-#### Docker Image
+<details>
+<summary><b>Docker Image</b></summary>
+<br>
 
 - Clone or download .zip of `tiktok-analyzer` python package.
 ```
@@ -68,19 +73,30 @@ docker build -t tt-analyzer .
 ```
 docker run --rm -ti tt-analyzer
 ```
+</details>
 
 ---
 
 ### Example Use Cases 
 
-#### Option 1: Download Tiktok Video. 
+<p align='left'><img src='https://github.com/kariemoorman/tiktok-analyzer/blob/main/example_data/ssstik.io_1698796057176.mp4-cv_output.gif' alt='example_gif' height='400'></p>
+
+<details>
+<summary><b>Option 1: Download Tiktok Video.</b></summary>
+<br>
 
 - Input URL: https://www.tiktok.com/@bytesiz3/video/7290398845777825070
 - Output: 
   - Metadata: [@bytesiz3_video_7290398845777825070_metadata.json](https://github.com/kariemoorman/tiktok-analyzer/blob/main/example_data/%40bytesiz3_video_7290398845777825070_metadata.json)
   - MP4: [ssstik.io_1698796057176.mp4](https://github.com/kariemoorman/tiktok-analyzer/blob/main/example_data/ssstik.io_1698796057176.mp4)
 
-#### Option 2: Transcribe Tiktok Video.
+<br>
+
+</details>
+
+<details>
+<summary><b>Option 2: Transcribe Tiktok Video.</b></summary>
+<br>
 
 - Input MP4: [ssstik.io_1698796057176.mp4](https://github.com/kariemoorman/tiktok-analyzer/blob/main/example_data/ssstik.io_1698796057176.mp4)
 - Output:
@@ -88,7 +104,14 @@ docker run --rm -ti tt-analyzer
   - CSV: [ssstik.io_1698796057176.csv](https://github.com/kariemoorman/tiktok-analyzer/blob/main/example_data/ssstik.io_1698796057176.csv)
   - MP3: [ssstik.io_1698796057176.mp3](https://github.com/kariemoorman/tiktok-analyzer/blob/main/example_data/ssstik.io_1698796057176.mp3)
 
-#### Option 3: Analyze Tiktok Video.
+<br>
+
+</details>
+
+<details>
+<summary><b>Option 3: Analyze Tiktok Video.</b></summary>
+<br>
+  
 - Input MP4: [ssstik.io_1698796057176.mp4](https://github.com/kariemoorman/tiktok-analyzer/blob/main/example_data/ssstik.io_1698796057176.mp4)
 - Output: 
   - Face Detection: 
@@ -96,6 +119,10 @@ docker run --rm -ti tt-analyzer
     - Faces Directory: [ssstik.io_1698796057176_faces/](https://github.com/kariemoorman/tiktok-analyzer/tree/main/example_data/ssstik.io_1698796057176_faces)
   - NLP:
     - Sentiment analysis: [ssstik.io_1698796057176.sentiment_analysis.txt](https://github.com/kariemoorman/tiktok-analyzer/blob/main/example_data/ssstik.io_1698796057176.sentiment_analysis.txt)
+
+<br>
+
+</details>
 
 ---
 ### Repository Contents
