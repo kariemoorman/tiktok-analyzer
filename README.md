@@ -20,7 +20,7 @@ Search & download Tiktok videos by username and/or video tag, and analyze video 
 ### Installation & Use
 
 <details>
-<summary><b>Virtual Env</b></summary>
+<summary><b>Virtual Environment</b></summary>
 <br>
 
 - Clone or download .zip of `tiktok-analyzer` python package.
