@@ -146,7 +146,7 @@ docker run --rm -ti tt-analyzer
 ### Use Cases 
 
 <details>
-<summary><b>Option 1: Download Tiktok Video.</b></summary>
+<summary><b>Option 1: Download a Tiktok Video.</b></summary>
 <br>
 
 - Input URL: https://www.tiktok.com/@bytesiz3/video/7290398845777825070
@@ -159,7 +159,7 @@ docker run --rm -ti tt-analyzer
 </details>
 
 <details>
-<summary><b>Option 2: Transcribe Tiktok Video.</b></summary>
+<summary><b>Option 2: Transcribe a Tiktok Video.</b></summary>
 <br>
 
 - Input MP4: [ssstik.io_1698796057176.mp4](https://github.com/kariemoorman/tiktok-analyzer/blob/main/example_data/ssstik.io_1698796057176.mp4)
@@ -173,7 +173,7 @@ docker run --rm -ti tt-analyzer
 </details>
 
 <details>
-<summary><b>Option 3: Analyze Tiktok Video.</b></summary>
+<summary><b>Option 3: Analyze a Tiktok Video.</b></summary>
 <br>
   
 - Input MP4: [ssstik.io_1698796057176.mp4](https://github.com/kariemoorman/tiktok-analyzer/blob/main/example_data/ssstik.io_1698796057176.mp4)
