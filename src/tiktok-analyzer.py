@@ -5,6 +5,8 @@ from scrapers.tiktok_video_metadata_scraper import TiktokVideoMetadataScraper
 from transcribers.tiktok_video_to_text import SpeechConverter
 from nlp.sentiment_analysis import SentimentAnalyzer
 from cv.face_detection import FaceDetection
+from cv.object_detection import ObjectDetection
+
 
 def main():
     print(
@@ -42,7 +44,7 @@ def main():
     
     while True:
         # Prompt the user for input
-        user_input = input("Enter a command (1, 2, 3, or 'exit' to quit): ")
+        user_input = input("\nEnter a command (1, 2, 3, or 'exit' to quit): ")
 
         # Check the user's input and perform tasks accordingly
         if user_input == '1':
@@ -62,15 +64,30 @@ def main():
         elif user_input == '3':
             print("\nYou selected option 3: 'Analyze a Tiktok Video.'\n")
             face_detection = input("Do you want face detection? (y/n): ")
-            print('\nRad...\n')
+            print('\n Rad...\n')
+            object_detection = input("Do you want object detection? (y/n): ")
+            print('\n Awesome...\n')
             nlp = input("Do you want NLP? (y/n): ")
-            print('\nCool...\n')
+            print('\n Cool...\n')
             if face_detection in ['y', 'yes', 'Y', 'YES', 'Yes']:
                 mp4 = input("Enter mp4 filepath: ")
                 detector = FaceDetection(mp4)
+                print("\n...Starting Face Detection task...")
                 detector.detect_faces()
+                print("   Face Detection task complete!\n")
             else:
                 mp4 = None
+            if object_detection in ['y', 'yes', 'Y', 'YES', 'Yes']:
+                if mp4 is None:
+                    filepath = input("Enter mp4 filepath: ")
+                else:
+                    filepath = mp4
+                detector = ObjectDetection(f'{filepath}')
+                print("\n...Starting Object Detection task...")
+                detector.detect_objects()
+                print("   Object Detection task complete!\n")
+            else:
+                pass
             if nlp in ['y', 'yes', 'Y', 'YES', 'Yes']:
                 if mp4 is None:
                     filepath = input("Enter mp4 filepath: ")
@@ -84,16 +101,18 @@ def main():
                         data = json.load(file)
                     text = data['text']['text']
                 analyzer = SentimentAnalyzer()
+                print("\n...Starting NLP analysis task...")
                 analyzer.analyze_comments(text, filepath)
+                print("   NLP analysis task complete!\n")
             else:
-                pass                
-
-        elif user_input.lower() == 'exit':
+                pass
+            
+        elif user_input.lower() in ['exit', 'q', 'quit']:
             print("\nExiting the program. Goodbye!\n")
-            break 
+            break
         
         else:
-            print("\n")
+            print("\n[!] Invalid entry. Please try again.")
 
 if __name__ == "__main__":
     main()
