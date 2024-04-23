@@ -5,7 +5,7 @@
 
 ### Description
 
-Search & download Tiktok videos by username and/or video tag, and analyze video contents. Transcribe video speech to text and perform NLP analysis tasks (e.g., keyword and topic discovery; emotion/sentiment analysis). Isolate audio signal and perform signal processing analysis tasks (e.g., pitch, prosody and sentiment analysis). Isolate visual stream and perform image tasks (e.g., object detection; face detection).
+Search & download Tiktok videos by username and/or video tag, and analyze video contents. Transcribe video speech to text and perform NLP analysis tasks (e.g., keyword and topic discovery; emotion/sentiment analysis). Isolate audio signal and perform signal processing analysis tasks (e.g., pitch, prosody and sentiment analysis). Isolate visual stream and perform image tasks (e.g., object detection, face detection).
 
 ---
 
@@ -120,12 +120,16 @@ docker run --rm -ti tt-analyzer
 </details>
 
 <details>
-<summary><b>CV Object/Face Detection</b></summary>
+<summary><b>Face & Object Detection</b></summary>
 <br>
   
   - [face_detection.py](https://github.com/kariemoorman/tiktok-analyzer/blob/main/src/cv/face_detection.py)  
     Conduct face detection task on Tiktok video (in mp4 format).  
-      E.g., ```python3 face_detection.py <video.mp4> -o 'output/file/path'```
+      E.g., ```python3 face_detection.py <video.mp4>```
+    
+  - [object_detection.py](https://github.com/kariemoorman/tiktok-analyzer/blob/main/src/cv/object_detection.py)  
+    Conduct object detection task on Tiktok video (in mp4 format).
+      E.g., ```python3 object_detection.py <video.mp4>```
 
 <br>
 </details>
