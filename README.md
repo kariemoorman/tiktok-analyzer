@@ -86,11 +86,11 @@ docker run --rm -ti tt-analyzer
     Choose either Selenium or Pyppeteer to dynamically scrape TikTok videos for one or more Tiktok usernames.  
       E.g., ```python3 tiktok_user_video_scraper.py <username> <username> -b pyppeteer -o csv```
 
-  - [tiktok_tag_video_scraper.py](https://github.com/kariemoorman/tiktok-analyzer/blob/main/src/scrapers/tiktok_tag_video_scraper.py)
+  - [tiktok_tag_video_scraper.py](https://github.com/kariemoorman/tiktok-analyzer/blob/main/src/scrapers/tiktok_tag_video_scraper.py)  
     Choose either Selenium or Pyppeteer to dynamically scrape TikTok videos for one or more Tiktok tags.  
     E.g., ```python3 tiktok_tag_video_scraper.py physics lhc -b pyppeteer -o csv```
 
-  - [tiktok_video_metadata_scraper.py](https://github.com/kariemoorman/tiktok-analyzer/blob/main/src/scrapers/tiktok_video_metadata_scraper.py)
+  - [tiktok_video_metadata_scraper.py](https://github.com/kariemoorman/tiktok-analyzer/blob/main/src/scrapers/tiktok_video_metadata_scraper.py)  
     Export metadata from a Tiktok video.  
     E.g., ```python3 tiktok_video_metadata_scraper.py <tiktok_video_url>```
 
@@ -101,7 +101,7 @@ docker run --rm -ti tt-analyzer
 <summary><b>TikTok Video Downloaders</b></summary>
 <br>
 
-  - [tiktok_downloader.py](https://github.com/kariemoorman/tiktok-analyzer/blob/main/src/downloaders/tiktok_downloader.py) 
+  - [tiktok_downloader.py](https://github.com/kariemoorman/tiktok-analyzer/blob/main/src/downloaders/tiktok_downloader.py)   
     Choose either Selenium or Pyppeteer to dynamically download one or more Tiktok videos.  
       E.g., ```python3 tiktok_downloader.py <tiktok_video_url> -b selenium -d firefox```
 
