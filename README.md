@@ -3,6 +3,13 @@
 
 <p align='center'><img src='https://github.com/kariemoorman/tiktok-analyzer/blob/main/tiktok-analyzer.png' alt="Tiktok-Teller" width='50%;' ></p>
 
+<br>
+
+![GitHub last commit](https://img.shields.io/github/last-commit/kariemoorman/tiktok-analyzer)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/kariemoorman/tiktok-analyzer)
+![GitHub stars](https://img.shields.io/github/stars/kariemoorman/tiktok-analyzer?style=social)
+![GitHub stars](https://img.shields.io/github/forks/kariemoorman/tiktok-analyzer?style=social)
+
 ### Description
 
 Search & download Tiktok videos by username and/or video tag, and analyze video contents. Transcribe video speech to text and perform NLP analysis tasks (e.g., keyword and topic discovery; emotion/sentiment analysis). Isolate audio signal and perform signal processing analysis tasks (e.g., pitch, prosody and sentiment analysis). Isolate visual stream and perform image tasks (e.g., object detection, face detection).
