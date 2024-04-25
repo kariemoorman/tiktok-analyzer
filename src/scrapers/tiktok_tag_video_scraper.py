@@ -29,7 +29,7 @@ class TiktokTagVideoScraper:
     python3 tiktok_tag_video_scraper.py amazonscam --b pyppeteer --o csv
     '''
     
-    def __init__(self, browser, driver, output_file_format):
+    def __init__(self, browser:str, driver:str, output_file_format:str):
         self.user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
         self.snapshotdate = datetime.today().strftime('%d-%b-%Y')
         self.snapshotdatetime = datetime.today().strftime('%d-%b-%Y_%H-%M-%S')
@@ -39,7 +39,7 @@ class TiktokTagVideoScraper:
         self.output_file_format = output_file_format
         print(f'Initiating task using {browser}...')
 
-    async def _scroll_to_end_selenium(self, driver):
+    async def _scroll_to_end_selenium(self, driver:str):
         SCROLL_PAUSE_TIME = 30
         # Get the height of the whole page
         last_height = driver.execute_script("return document.body.scrollHeight")
@@ -55,7 +55,7 @@ class TiktokTagVideoScraper:
             last_height = new_height
         time.sleep(10)
 
-    async def _scroll_to_end_pyppeteer(self, page):
+    async def _scroll_to_end_pyppeteer(self, page:str):
         SCROLL_PAUSE_TIME = 30
         # Get the height of the whole page
         last_height = await page.evaluate('() => document.body.scrollHeight')
@@ -70,7 +70,7 @@ class TiktokTagVideoScraper:
             # Update the scroll height for the next iteration
             last_height = new_height
 
-    async def _extract_data_selenium(self, tag, driver):
+    async def _extract_data_selenium(self, tag:str, driver:str):
         url = f"https://www.tiktok.com/tag/{tag}"
         driver.get(url)
         await self._scroll_to_end_selenium(driver)
@@ -93,7 +93,7 @@ class TiktokTagVideoScraper:
         self.tiktok_df['title'] = titles
         self._save_to_file(tag)
 
-    async def _extract_data_pyppeteer(self, page, tag):
+    async def _extract_data_pyppeteer(self, page:str, tag:str):
         url = f"https://www.tiktok.com/tag/{tag}"
         await page.goto(url)
         await self._scroll_to_end_pyppeteer(page)
@@ -116,7 +116,7 @@ class TiktokTagVideoScraper:
         self.tiktok_df['title'] = titles
         self._save_to_file(tag)
 
-    def _save_to_file(self, tag):
+    def _save_to_file(self, tag:str):
         if self.output_file_format == 'json':
             self.tiktok_df.to_json(f"../../__data/__tiktoks/{tag}/{tag}__tiktok_videos_{self.snapshotdatetime}.json", orient='records')
         elif self.output_file_format == 'parquet':
@@ -124,7 +124,7 @@ class TiktokTagVideoScraper:
         elif self.output_file_format == 'csv':
             self.tiktok_df.to_csv(f"../../__data/__tiktoks/{tag}/{tag}__tiktok_videos_{self.snapshotdatetime}.csv", index=False, sep='\t', encoding='utf-8')
     
-    async def scrape_tag_video(self, tag_list):
+    async def scrape_tag_video(self, tag_list:list):
         if self.browser == 'selenium':
             if self.driver == 'chrome':
                 CHROMEDRIVER_PATH = ""
@@ -144,7 +144,7 @@ class TiktokTagVideoScraper:
                 WINDOW_SIZE = "1920,1080"
                 options = FirefoxOptions()
                 options.add_argument(f"user-agent={self.user_agent}")
-                #options.add_argument("--headless")  
+                options.add_argument("--headless")  
                 options.add_argument("--window-size=%s" % WINDOW_SIZE)
 
                 driver = webdriver.Firefox(options=options)

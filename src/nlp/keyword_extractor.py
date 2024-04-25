@@ -6,7 +6,7 @@ import pandas as pd
 nlp = spacy.load("en_core_web_md")
 
         
-def extract_keywords(document):
+def extract_keywords(document:str):
     # Minor alterations using regex
     string = re.sub(r"(\bi\'m\b)", "i am", document)
     string = re.sub(r"(\bi\'ve\b)", "i have", string)

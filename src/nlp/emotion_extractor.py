@@ -62,7 +62,7 @@ emotion_adjs = [word.lower() for word in emotion_adjs]
 emotion_nouns = [word.lower() for word in emotion_nouns]
 emotion_verbs = [word.lower() for word in emotion_verbs]
 
-def filter_words(text):
+def filter_words(text:str):
     # Minor alterations using regex
     string = re.sub(r"(\bi\'m\b)", "i am", text)
     string = re.sub(r"(\bi\'ve\b)", "i have", string)

@@ -20,7 +20,7 @@ class TiktokVideoMetadataScraper:
         return downloads_dir + transformed_string + "_metadata.json"
             
 
-    async def scroll_to_end_pyppeteer(self, page):
+    async def scroll_to_end_pyppeteer(self, page:str):
         SCROLL_PAUSE_TIME = 50
         last_height = await page.evaluate('() => document.body.scrollHeight')
         while True:

@@ -30,13 +30,13 @@ class SentimentAnalyzer:
                                         # Add more words and weights
                                         }
 
-    def open_json(self, filepath): 
+    def open_json(self, filepath:str): 
         with open(filepath, 'r') as file:
             data = json.load(file)
         text = data['text']['text']
         return text
         
-    def calculate_derogatory_score(self, sentence):
+    def calculate_derogatory_score(self, sentence:str):
         normalized_score = 0
         total_weight = sum(self.derogatory_word_weights.values())
         words = word_tokenize(sentence)
@@ -51,7 +51,7 @@ class SentimentAnalyzer:
 
         return normalized_score
 
-    def nltk_analyzer(self, sentence):
+    def nltk_analyzer(self, sentence:str):
         words = word_tokenize(sentence)
         words = [word for word in words if word.lower() not in self.stop_words]
 
@@ -67,7 +67,7 @@ class SentimentAnalyzer:
 
         return sentiment_score, emotion_found, derogatory_found, derogatory_score
 
-    def spacy_analyzer(self, sentence):
+    def spacy_analyzer(self, sentence:str):
         doc = self.nlp(sentence)
         return {
             "Polarity": doc._.blob.polarity,
@@ -75,7 +75,7 @@ class SentimentAnalyzer:
             "Emotion_words": doc._.blob.sentiment_assessments.assessments
         }
 
-    def analyze_comments(self, text, filepath):
+    def analyze_comments(self, text:str, filepath:str):
         base_filename = os.path.splitext(filepath)[0]
         output_file = f'{base_filename}.sentiment_analysis.txt'
         # if filepath.endswith('.json'):

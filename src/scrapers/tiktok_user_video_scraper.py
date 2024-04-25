@@ -29,7 +29,7 @@ class TikTokUserVideoScraper:
     python3 tiktok_user_video_scraper.py blitzphd eczachly --b pyppeteer --o csv
     '''
     
-    def __init__(self, browser, output_file_format):
+    def __init__(self, browser:str, output_file_format:str):
         self.snapshotdate = datetime.today().strftime('%d-%b-%Y')
         self.snapshotdatetime = datetime.today().strftime('%d-%b-%Y_%H-%M-%S')
         self.tiktok_df = pd.DataFrame()
@@ -37,7 +37,7 @@ class TikTokUserVideoScraper:
         self.output_file_format = output_file_format
         print(f'Initiating task using {browser}...')
 
-    async def _scroll_to_end_selenium(self, driver):
+    async def _scroll_to_end_selenium(self, driver:str):
         SCROLL_PAUSE_TIME = 30
         # Get the height of the whole page
         last_height = driver.execute_script("return document.body.scrollHeight")
@@ -53,7 +53,7 @@ class TikTokUserVideoScraper:
             last_height = new_height
         time.sleep(10)
 
-    async def _scroll_to_end_pyppeteer(self, page):
+    async def _scroll_to_end_pyppeteer(self, page:str):
         SCROLL_PAUSE_TIME = 30
         # Get the height of the whole page
         last_height = await page.evaluate('() => document.body.scrollHeight')
@@ -68,7 +68,7 @@ class TikTokUserVideoScraper:
             # Update the scroll height for the next iteration
             last_height = new_height
 
-    async def _extract_data_selenium(self, username, driver):
+    async def _extract_data_selenium(self, username:str, driver:str):
         url = f"https://www.tiktok.com/@{username}"
         driver.get(url)
         await self._scroll_to_end_selenium(driver)
@@ -83,7 +83,7 @@ class TikTokUserVideoScraper:
         self.tiktok_df['video_link'] = video_links
         self._save_to_file(username)
 
-    async def _extract_data_pyppeteer(self, page, username):
+    async def _extract_data_pyppeteer(self, page:str, username:str):
         url = f"https://www.tiktok.com/@{username}"
         await page.goto(url)
         await self._scroll_to_end_pyppeteer(page)
@@ -97,7 +97,7 @@ class TikTokUserVideoScraper:
         self.tiktok_df['video_link'] = video_links
         self._save_to_file(username)
 
-    def _save_to_file(self, username):
+    def _save_to_file(self, username:str):
         if self.output_file_format == 'json':
             self.tiktok_df.to_json(f"../__data/__tiktoks/{username}/tiktok_data_{username}_{self.snapshotdatetime}.json", orient='records')
         elif self.output_file_format == 'parquet':
@@ -105,7 +105,7 @@ class TikTokUserVideoScraper:
         elif self.output_file_format == 'csv':
             self.tiktok_df.to_csv(f"../__data/__tiktoks/{username}/tiktok_data_{username}_{self.snapshotdatetime}.csv", index=False, sep='\t', encoding='utf-8')
     
-    async def scrape_user_video(self, username_list):
+    async def scrape_user_video(self, username_list:list):
         if self.browser == 'selenium':
             CHROMEDRIVER_PATH = ""
             CHROME_PATH = ""

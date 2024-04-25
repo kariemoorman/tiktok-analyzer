@@ -12,7 +12,7 @@ from selenium.webdriver.common.by import By
 
 
 class TikTokVideoDownloader:
-    def __init__(self, url_list):
+    def __init__(self, url_list:list):
         self.url_list = url_list
         self.comment_scraper_url = 'https://ssstik.io/en'
         # Set user agent
@@ -66,7 +66,7 @@ class TikTokVideoDownloader:
 
         await browser.close()
     
-    def download_videos_selenium(self, driver):
+    def download_videos_selenium(self, driver:str):
         #comment_scraper_url = 'https://ssstik.io/en'
         # Specify Selenium Driver
         if driver == 'chrome':
@@ -132,8 +132,8 @@ class TikTokVideoDownloader:
 def main():
     parser = argparse.ArgumentParser(description="Download TikTok videos using ssstik.io")
     parser.add_argument("urls", nargs='+', help="List of TikTok video URLs to download")
-    parser.add_argument("--browser","-b", type=str, choices=["pyppeteer", "selenium"], help="Browser to use for downloading (default: selenium)")
-    parser.add_argument("--driver","-d", type=str, choices=["chrome", "firefox"], help="Web Driver for use with Selenium (default: chrome)")
+    parser.add_argument("--browser","-b", type=str, choices=["pyppeteer", "selenium"], default='selenium', help="Browser to use for downloading (default: selenium)")
+    parser.add_argument("--driver","-d", type=str, choices=["chrome", "firefox"], default='chrome', help="Web Driver for use with Selenium (default: chrome)")
     
     args = parser.parse_args()
 
