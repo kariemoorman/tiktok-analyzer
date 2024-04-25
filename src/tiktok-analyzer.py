@@ -93,13 +93,8 @@ def main():
                     filepath = input("Enter mp4 filepath: ")
                 else:
                     filepath = mp4
-                if filepath.endswith('.mp4'):
-                    speech_converter = SpeechConverter(f'{filepath}')
-                    text = speech_converter.extract_and_transform_speech()
-                elif filepath.endswith('.json'): 
-                    with open(f'{filepath}', 'r') as file:
-                        data = json.load(file)
-                    text = data['text']['text']
+                speech_converter = SpeechConverter(f'{filepath}')
+                text = speech_converter.extract_and_transform_speech()
                 analyzer = SentimentAnalyzer()
                 print("\n...Starting NLP analysis task...")
                 analyzer.analyze_comments(text, filepath)

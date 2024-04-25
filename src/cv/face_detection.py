@@ -16,7 +16,7 @@ cv2_base_dir = os.path.dirname(current_script_path)
 haar_model = os.path.join(cv2_base_dir, 'src/cv/models/haarcascade_frontalface_default.xml')
 
 class FaceDetection:
-    def __init__(self, video_filepath, classifier_path=haar_model):
+    def __init__(self, video_filepath:str, classifier_path=haar_model):
         self.face_cascade = cv2.CascadeClassifier(classifier_path)
         self.video_filepath = video_filepath.strip()
         self.output_directory = f'{os.path.dirname(video_filepath)}/{os.path.splitext(os.path.basename(video_filepath))[0]}_faces'
@@ -66,7 +66,6 @@ class FaceDetection:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Face Detection in Video Stream")
     parser.add_argument("video_filepath", help="Path to the input video file")
-    #parser.add_argument("-o", "--output-directory", default='faces', help="Output directory for saving images of detected faces")
     
     args = parser.parse_args()
     

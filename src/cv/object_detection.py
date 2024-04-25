@@ -16,7 +16,7 @@ cv2_base_dir = os.path.dirname(current_script_path)
 detect_model = os.path.join(cv2_base_dir, 'src/cv/models/yolov8n.pt')
 
 class ObjectDetection:
-    def __init__(self, video_filepath, model='detect'):
+    def __init__(self, video_filepath:str, model='detect'):
         self.video_filepath = video_filepath.strip()
         self.output_directory = f'{os.path.dirname(video_filepath)}/{os.path.splitext(os.path.basename(video_filepath))[0]}_objects'
         if model == 'detect':
@@ -29,14 +29,12 @@ class ObjectDetection:
             print('Please specify a CV model: detect, segment, pose.')
 
     def detect_objects(self):
-
         names = self.model.names
         track_history = defaultdict(lambda: [])
-
+        
         file_name_wo_extension = f'{os.path.dirname(self.video_filepath)}/{os.path.splitext(os.path.basename(self.video_filepath))[0]}'
         video_path_out = '{}_objects.mp4'.format(file_name_wo_extension)
         
-        # Initialize video capture from local MP4 file
         cap = cv2.VideoCapture(self.video_filepath)
 
         w, h, fps = (int(cap.get(x)) for x in (cv2.CAP_PROP_FRAME_WIDTH, cv2.CAP_PROP_FRAME_HEIGHT, cv2.CAP_PROP_FPS))
