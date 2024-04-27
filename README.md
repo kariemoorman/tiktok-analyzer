@@ -7,6 +7,7 @@
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/kariemoorman/tiktok-analyzer)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/kariemoorman/tiktok-analyzer)
+[![GitHub license](https://img.shields.io/badge/license-GNU_General_Public_License--3.0-blue.svg)](https://raw.githubusercontent.com/kariemoorman/tiktok-analyzer/main/LICENSE)
 ![GitHub stars](https://img.shields.io/github/stars/kariemoorman/tiktok-analyzer?style=social)
 ![GitHub stars](https://img.shields.io/github/forks/kariemoorman/tiktok-analyzer?style=social)
 
