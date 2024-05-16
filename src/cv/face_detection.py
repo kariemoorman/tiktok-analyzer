@@ -4,6 +4,7 @@ import cv2
 import os
 import uuid
 import argparse
+from cv.face_match import FaceMatch
 
 ## Download haarcascade_frontalface_default.xml using the following link, and place it in the : 
 #    -  https://github.com/opencv/opencv/blob/4.x/data/haarcascades/haarcascade_frontalface_default.xml
@@ -63,6 +64,11 @@ class FaceDetection:
         out.release()
         cv2.destroyAllWindows()
 
+    def compare_faces(self): 
+	    image_matcher = FaceMatch(self.output_directory)
+	    image_matcher.compare_faces()
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Face Detection in Video Stream")
     parser.add_argument("video_filepath", help="Path to the input video file")
@@ -71,3 +77,4 @@ if __name__ == "__main__":
     
     detector = FaceDetection(args.video_filepath)
     detector.detect_faces()
+    detector.compare_faces()

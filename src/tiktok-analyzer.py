@@ -74,6 +74,7 @@ def main():
                 detector = FaceDetection(mp4)
                 print("\n...Starting Face Detection task...")
                 detector.detect_faces()
+                detector.compare_faces()
                 print("   Face Detection task complete!\n")
             else:
                 mp4 = None
