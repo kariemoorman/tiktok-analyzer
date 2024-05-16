@@ -26,3 +26,6 @@ temp/
 
 # Logs
 geckodriver.log
+
+# Tarballs
+face-re.tar.gz
