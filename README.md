@@ -208,7 +208,8 @@ docker run --rm -ti tt-analyzer
 
 ### Example Use Case: Analyze Video (Face Detection & NLP)
 
-<p align='left'><img src='https://github.com/kariemoorman/tiktok-analyzer/blob/main/example_data/ssstik.io_1698796057176.mp4-cv_output.gif' alt='example_gif' height='400'></p>
+<p align='center'><img src='https://github.com/kariemoorman/tiktok-analyzer/blob/main/example_data/ssstik.io_1698796057176.mp4-cv_output.gif' alt='example_gif' height='400'></p>
+
 
 ```
 Text:  How you can check up a URL is safe. Go to Google and type transparency report. You can enter. Click this first one. We're going to go to Google safe browsing. Site status. And here you can enter the URL. Stay safe, follow for more.
