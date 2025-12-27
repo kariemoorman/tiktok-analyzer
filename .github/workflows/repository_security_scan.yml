@@ -1,0 +1,167 @@
+name: "Repository Vulnerability Scan"
+description: "Repository scan for vulnerabilities and secrets"
+
+on:
+  # push:
+  #   branches: [main, master]
+  # pull_request:
+  #   types:
+  #     [opened, synchronize, reopened]
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+    inputs:
+      run_trivy_scan:
+        description: "Whether to run Trivy scan"
+        required: true
+        type: boolean
+        default: true
+      run_trufflehog_scan:
+        description: "Whether to run Trufflehog scan"
+        required: true
+        type: boolean
+        default: true
+      run_owasp_scan:
+        description: "Whether to run OWASP scan"
+        required: true
+        type: boolean
+        default: true
+      run_snyk_scan:
+        description: "Whether to run Snyk scan"
+        required: true
+        type: boolean
+        default: true
+      run_jfrog_scan:
+        description: "Whether to run JFrog CLI scan"
+        required: true
+        type: boolean
+        default: false
+      run_codeql_scan:
+        description: "Whether to run CodeQL scan"
+        required: true
+        type: boolean
+        default: false
+      codeql_languages:
+        description: 'Comma-separated list of languages to scan'
+        required: true
+        type: string
+        default: 'python,javascript,c'
+      ref:
+        description: 'Git ref to scan'
+        required: false
+        type: string
+        default: 'main'
+      directory_path:
+        description: 'Directory to scan'
+        required: false
+        type: string
+        default: '.'
+      fail_on_critical:
+        description: 'Fail workflow if critical vulnerabilities are found'
+        required: false
+        type: boolean
+        default: true
+      fail_on_secrets:
+        description: 'Fail workflow if secrets are found'
+        required: false
+        type: boolean
+        default: true
+      post_pr_comment:
+        description: 'Post scan results as a PR comment'
+        required: false
+        type: boolean
+        default: true
+      snyk_severity_threshold:
+        description: "Fail if vulnerabilities at or above this severity exist (low|medium|high|critical)"
+        required: false
+        type: string
+        default: "high"
+      th_pattern_filter:
+        description: "Optional regex to filter results (leave blank for all)"
+        required: false
+        type: string
+      owasp_format:
+        description: "Report format (XML, HTML, JSON, ALL)"
+        required: false
+        default: "HTML"
+      owasp_project_name:
+        description: "Project name"
+        required: false
+        type: string
+        default: "my-project"
+      jf-url:
+        description: 'JFrog URL'
+        required: false
+        type: string
+      jf-oidc-provider:
+        description: 'JFrog OIDC Provider name'
+        required: false
+        type: string
+      jf-project-key:
+        description: 'JFrog Project key'
+        required: false
+        type: string
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: write
+  id-token: write
+
+jobs:
+  manual-security-scan:
+    if: github.event_name == 'workflow_dispatch'
+    uses: kariemoorman/.dotfiles/.github/workflows/repository_security_scan.yml@main
+    with:
+      run_trivy_scan: ${{ inputs.run_trivy_scan }}
+      run_trufflehog_scan: ${{ inputs.run_trufflehog_scan }}
+      run_owasp_scan: ${{ inputs.run_owasp_scan }}
+      run_snyk_scan: ${{ inputs.run_snyk_scan }}
+      run_jfrog_scan: ${{ inputs.run_jfrog_scan }}
+      run_codeql_scan: ${{ inputs.run_codeql_scan }}
+      codeql_languages: ${{ inputs.codeql_languages }}
+      ref: ${{ inputs.ref }}
+      directory_path: ${{ inputs.directory_path }}
+      fail_on_critical: ${{ inputs.fail_on_critical }}
+      fail_on_secrets: ${{ inputs.fail_on_secrets }}
+      post_pr_comment: ${{ inputs.post_pr_comment }}
+      snyk_severity_threshold: ${{ inputs.snyk_severity_threshold }}
+      th_pattern_filter: ${{ inputs.th_pattern_filter }}
+      owasp_format: ${{ inputs.owasp_format }}
+      owasp_project_name: ${{ inputs.owasp_project_name }}
+      jf-url: ${{ inputs.jf-url || vars.JFROG_URL }}
+      jf-oidc-provider: ${{ inputs.jf-oidc-provider || vars.JFROG_OIDC_PROVIDER }}
+      jf-project-key: ${{ inputs.jf-project-key || vars.JFROG_PROJECT_KEY }}
+    secrets:
+      github-token: ${{ secrets.GITHUB_TOKEN }}
+      snyk-token: ${{ secrets.SNYK_TOKEN }}
+
+  automated-security-scan:
+    if: github.event_name != 'workflow_dispatch'
+    uses: kariemoorman/.dotfiles/.github/workflows/repository_security_scan.yml@main
+    with:
+      run_trivy_scan: true
+      run_trufflehog_scan: true
+      run_owasp_scan: true
+      run_snyk_scan: true
+      run_jfrog_scan: false
+      run_codeql_scan: false
+      codeql_languages: 'python,c'
+      ref: ${{ github.ref }}
+      directory_path: '.'
+      fail_on_critical: true
+      fail_on_secrets: true
+      post_pr_comment: true
+      snyk_severity_threshold: 'high'
+      th_pattern_filter: false
+      owasp_format: 'HTML'
+      owasp_project_name: 'my-project'
+      # jf-url: ${{ vars.JFROG_URL }}
+      # jf-oidc-provider: ${{ vars.JFROG_OIDC_PROVIDER }}
+      # jf-project-key: ${{ vars.JFROG_PROJECT_KEY }}
+    secrets:
+      github-token: ${{ secrets.GITHUB_TOKEN }}
+      snyk-token: ${{ secrets.SNYK_TOKEN }}
