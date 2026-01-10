@@ -114,7 +114,7 @@ permissions:
 jobs:
   manual-security-scan:
     if: github.event_name == 'workflow_dispatch'
-    uses: kariemoorman/.dotfiles/.github/workflows/repository_security_scan.yml@main
+    uses: kariemoorman/github-reusable-workflows/.github/workflows/repository_security_scan.yml@main
     with:
       run_trivy_scan: ${{ inputs.run_trivy_scan }}
       run_trufflehog_scan: ${{ inputs.run_trufflehog_scan }}
@@ -141,7 +141,7 @@ jobs:
 
   automated-security-scan:
     if: github.event_name != 'workflow_dispatch'
-    uses: kariemoorman/.dotfiles/.github/workflows/repository_security_scan.yml@main
+    uses: kariemoorman/github-reusable-workflows/.github/workflows/repository_security_scan.yml@main
     with:
       run_trivy_scan: true
       run_trufflehog_scan: true
